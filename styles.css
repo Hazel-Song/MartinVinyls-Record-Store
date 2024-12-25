@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: url('images/background.png') center center;
+    background-size: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease-out;
+}
+
+.background::before,
+.background::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    background: #000;
+    z-index: 1;
+}
+
+.background::before {
+    top: -100vh;
+    height: 100vh;
+}
+
+.background::after {
+    bottom: -100vh;
+    height: 100vh;
+}
+
+.container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+}
+
+.npc {
+    position: absolute;
+    left: 15vw;
+    bottom: calc(50vh);
+    transform: translate(-50%, 50%); 
+    height: auto;
+    width: 35vw;
+    aspect-ratio: 2/3;
+    background: url('images/npc-normal.png') center bottom no-repeat;
+    background-size: contain;
+    transition: background-image 0.3s ease;
+}
+
+.dialog-box {
+    position: absolute;
+    right: 20px;
+    bottom: 23px;
+    background: rgba(54, 57, 63, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    height: calc(40vh - 20px);
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    color: #dcddde;
+}
+
+.chat-history {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #202225;
+    border-radius: 5px;
+    background: rgba(47, 49, 54, 0.8);
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+#userInput {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background: #40444b;
+    color: #dcddde;
+}
+
+#userInput::placeholder {
+    color: #72767d;
+}
+
+#sendBtn {
+    padding: 8px 15px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#sendBtn:hover {
+    background: #f57c00;
+}
+
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 10px;
+    padding: 2px 0;
+}
+
+.chat-message.user {
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.avatar.shop-owner {
+    background-image: url('images/shop-owner-avatar.png');
+}
+
+.avatar.user {
+    background-image: url('images/user-avatar.png');
+}
+
+.message-content {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.user .message-content {
+    background-color: #40444b;
+    color: #dcddde;
+}
+
+.shop-owner .message-content {
+    background-color: #ff9800;
+    color: white;
+}
+
+.chat-history::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+    background: #2f3136;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+    background: #202225;
+    border-radius: 4px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+    background: #40444b;
+}
+
+.arrow-button {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 12px solid rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s;
+}
+
+.arrow-button.active .arrow {
+    transform: rotate(180deg);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: -100vw;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95));
+    z-index: 1;
+    transition: right 0.5s ease;
+}
+
+.overlay.active {
+    right: 0;
+}
+
+.background.shifted {
+    transform: translate(-110%, -50%);
+} 
