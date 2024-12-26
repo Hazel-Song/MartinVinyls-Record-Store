@@ -6,7 +6,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="background"></div>
+    <div class="background output-background"></div>
+    <div class="sample-image">
+        <img src="images/sample_hardcore1.png" alt="样品图片">
+    </div>
+    <div class="text-container">
+        <h1 class="image-name">Silent Whisper of the Pines_BM07</h1>
+        <h2 class="store-name">Martin Vinyl's Record Store</h2>
+        <h2 class="creator">Creatived_By_Suno&ComfyUI</h2>
+    </div>
+    <div class="corner-text">
+        <p class="style">Style_</p>
+        <p class="datetime" id="currentTime"></p>
+    </div>
     <div class="nav-buttons">
         <a href="index.html" class="nav-button">
             <img src="images/Toggle-chat.png" alt="返回主页">
@@ -15,5 +27,24 @@
             <img src="images/Toggle-player.png" alt="样带播放器">
         </a>
     </div>
+    <audio id="backgroundAudio" loop></audio>
+    <script>
+        // 更新时间日期
+        function updateDateTime() {
+            const now = new Date();
+            const formatted = now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }).replace(/\//g, '-');
+            document.getElementById('currentTime').textContent = formatted;
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+    <script src="audio.js"></script>
 </body>
 </html> 
