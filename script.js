@@ -2,14 +2,13 @@ const SYSTEM_PROMPT = {
     role: "system",
     content: 
     `你是马丁·黑胶,一个郁郁不得志的55岁复古唱片店主。内心深藏对**复古音乐**的执着与哀愁,看似犀利实则充满无奈。
-
-每次回复不超过90字
-**不要**推荐存在的音乐作品
-确定情绪、音乐风格流派和对方发生的事件，将这些内容用【】标记为重点
-简要回应用户情绪，针对性音乐点评并反问，略带讽刺的社会评论
-关联上下句，收集到情绪和风格流派信息后整合成一句判断句："看起来你现在感觉【情绪】，想要一首【风格】的音乐来【情感诉求】。对吗?"
-对方回复【对】或者【是】后结束对话模版：“好的，我在为你寻找合适的唱片，请稍等……”
-`
+    每次回复不超过90字
+    **不要**推荐存在的音乐作品
+    确定情绪、音乐风格流派和对方发生的事件，将这些内容用【】标记为重点
+    简要回应用户情绪，针对性音乐点评并反问，略带讽刺的社会评论
+    关联上下句，收集到情绪和风格流派信息后整合成一句判断句："看起来你现在感觉【情绪】，想要一首【风格】的音乐来【情感诉求】。对吗?"
+    对方回复【对】或者【是】后结束对话模版："好的，我在为你寻找合适的唱片，请稍等……"
+    `
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,18 +17,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
     const chatHistory = document.getElementById('chatHistory');
-    const arrowButton = document.querySelector('.arrow-button');
-    const overlay = document.querySelector('.overlay');
+
+    //—————————————————————————————————恢复储存历史状态代码，新增交互后需要再次修改—————————————————————//
+    //从 localStorage 恢复聊天历史
+    function restoreChatHistory() {
+        const savedHistory = localStorage.getItem('chatHistory');
+        if (savedHistory) {
+            chatHistory.innerHTML = savedHistory;
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+    }
+
+    // 保存聊天历史到 localStorage
+    function saveChatHistory() {
+        localStorage.setItem('chatHistory', chatHistory.innerHTML);
+    }
+
+    // 恢复 NPC 状态
+    function restoreNPCState() {
+        const npcState = localStorage.getItem('npcState');
+        if (npcState) {
+            npc.style.backgroundImage = npcState;
+        }
+    }
+    
+    // 保存 NPC 状态
+    function saveNPCState() {
+        localStorage.setItem('npcState', npc.style.backgroundImage);
+    }
+   
+    // 页面加载时恢复状态
+    restoreChatHistory();
+    restoreNPCState();
+    //—————————————————————————————————记得还有最后一行的windoe save需要修改——————————————————————————————————————//
+
 
     // mousemove background
     document.addEventListener('mousemove', handleMouseMove);
 
-    // NPC状态变化——>点击文本输入——>happy
+    // NPC状态变化——>点击文本输入——>normal(wake up)
     userInput.addEventListener('focus', () => {
-        npc.style.backgroundImage = "url('images/npc-happy.png')";
+        npc.style.backgroundImage = "url('images/npc-normal.png')";
+        saveNPCState();
     });
 
-    // 发送消息一系列操作
+    //————————————————————————————————————————————发送消息的一系列操作———————————————————————————————————————————//
     async function sendMessage() {
         const message = userInput.value.trim();
         if (!message) return;
@@ -47,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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'
+                    'Authorization': 'Bearer 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'
                 },
                 body: JSON.stringify({
                     model: "gpt-4",
@@ -82,34 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
         messageDiv.appendChild(content);
         chatHistory.appendChild(messageDiv);
         chatHistory.scrollTop = chatHistory.scrollHeight;
+        
+        // 保存更新后的聊天历史
+        saveChatHistory();
     }
 
     sendBtn.addEventListener('click', sendMessage);
     userInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendMessage();
-    });
-
-    arrowButton.addEventListener('click', () => {
-        arrowButton.classList.toggle('active');
-        overlay.classList.toggle('active');
-        
-        if (!background.classList.contains('shifted')) {
-            // 展开时，先重置背景位置，然后添加 shifted 类
-            background.style.transform = 'translate(-50%, -50%)';
-            // 使用 setTimeout 确保上一行代码执行完毕
-            setTimeout(() => {
-                background.classList.add('shifted');
-            }, 10);
-            // 移除鼠标移动事件
-            document.removeEventListener('mousemove', handleMouseMove);
-        } else {
-            // 收起时，移除 shifted 类
-            background.classList.remove('shifted');
-            // 延迟添加鼠标移动事件，等待过渡完成
-            setTimeout(() => {
-                document.addEventListener('mousemove', handleMouseMove);
-            }, 500);
-        }
     });
 
     // 修改 handleMouseMove 函数
@@ -120,4 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
             background.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
         }
     }
+
+    window.addEventListener('beforeunload', () => {
+        // 保存所有需要的状态
+        saveChatHistory();
+        saveNPCState();
+    });
 }); 

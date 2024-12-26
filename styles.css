@@ -1,9 +1,16 @@
+/*字体设置*/
+@font-face {
+    font-family: 'IPix';
+    src: url('fonts/IPix.ttf') format('truetype');
+}
+/*——————————————————————————————————————————————index页————————————————————————————————————————————————*/
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
     overflow: hidden;
     background: #000;
+    font-family: 'IPix', sans-serif;
 }
 
 .background {
@@ -18,25 +25,6 @@ body {
     transition: transform 0.5s ease-out;
 }
 
-.background::before,
-.background::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    background: #000;
-    z-index: 1;
-}
-
-.background::before {
-    top: -100vh;
-    height: 100vh;
-}
-
-.background::after {
-    bottom: -100vh;
-    height: 100vh;
-}
-
 .container {
     position: fixed;
     width: 100%;
@@ -46,13 +34,13 @@ body {
 
 .npc {
     position: absolute;
-    left: 15vw;
-    bottom: calc(50vh);
+    left: 20vw;
+    bottom: calc(40vh);
     transform: translate(-50%, 50%); 
     height: auto;
-    width: 35vw;
+    width: 25vw;
     aspect-ratio: 2/3;
-    background: url('images/npc-normal.png') center bottom no-repeat;
+    background: url('images/npc-sleep.png') center bottom no-repeat;
     background-size: contain;
     transition: background-image 0.3s ease;
 }
@@ -69,6 +57,7 @@ body {
     display: flex;
     flex-direction: column;
     color: #dcddde;
+    font-family: 'IPix', sans-serif;
 }
 
 .chat-history {
@@ -79,6 +68,7 @@ body {
     border: 1px solid #202225;
     border-radius: 5px;
     background: rgba(47, 49, 54, 0.8);
+    font-family: 'IPix', sans-serif;
 }
 
 .input-area {
@@ -94,6 +84,7 @@ body {
     border-radius: 5px;
     background: #40444b;
     color: #dcddde;
+    font-family: 'IPix', sans-serif;
 }
 
 #userInput::placeholder {
@@ -108,6 +99,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s;
+    font-family: 'IPix', sans-serif;
 }
 
 #sendBtn:hover {
@@ -126,26 +118,12 @@ body {
     flex-direction: row-reverse;
 }
 
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-size: cover;
-}
-
-.avatar.shop-owner {
-    background-image: url('images/shop-owner-avatar.png');
-}
-
-.avatar.user {
-    background-image: url('images/user-avatar.png');
-}
-
 .message-content {
     max-width: 70%;
     padding: 8px 12px;
     border-radius: 4px;
     position: relative;
+    font-family: 'IPix', sans-serif;
 }
 
 .user .message-content {
@@ -175,51 +153,107 @@ body {
     background: #40444b;
 }
 
-.arrow-button {
+/*——————————————————————————————————————————————导航————————————————————————————————————————————————*/
+.nav-buttons {
     position: fixed;
+    top: 20px;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 8px 0 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    transform: scale(0.4);
+    transform-origin: top right;
+}
+
+.nav-button {
+    display: block;
     cursor: pointer;
-    z-index: 3;
+    transition: opacity 0.2s;
+}
+
+.nav-button:hover {
+    opacity: 0.8;
+}
+
+.nav-button img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+/*——————————————————————————————————————————————player页————————————————————————————————————————————————*/
+.player-background {
+    background: url('images/background-player.png') center center;
+    background-size: cover;
+}
+
+/* 播放器页面样式 */
+.player-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: opacity 0.3s;
+    z-index: 2;
 }
 
-.arrow {
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 12px solid rgba(255, 255, 255, 0.8);
-    transition: transform 0.3s;
-}
-
-.arrow-button.active .arrow {
-    transform: rotate(180deg);
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    right: -100vw;
-    width: 100vw;
+.black-layer {
+    width: 25vw;
     height: 100vh;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95));
-    z-index: 1;
-    transition: right 0.5s ease;
+    background: url('images/blacklayer.png') no-repeat;
+    background-size: cover;
+    position: relative;
 }
 
-.overlay.active {
-    right: 0;
+.track-list {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.background.shifted {
-    transform: translate(-110%, -50%);
-} 
+.track-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    color: white;
+    font-family: 'IPix', sans-serif;
+}
+
+.track-text {
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.play-button {
+    display: none;
+    height: 1em;
+    width: auto;
+}
+
+.track-item:hover .track-text {
+    color: #ff9800;
+}
+
+.track-item:hover .play-button {
+    display: block;
+}
+
+.record-player {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.record-player img {
+    max-width: 60%;
+    height: auto;
+}
