@@ -7,37 +7,44 @@
 </head>
 <body>
     <div class="background player-background"></div>
+    <canvas id="waveCanvas" class="wave-canvas"></canvas>
     <div class="player-container">
         <div class="black-layer">
             <div class="track-list">
                 <div class="track-item">
-                    <span class="track-text">01-/nBarbershop</span>
+                    <span class="track-text">00-Background_Music</span>
                     <img src="images/playbutton.png" class="play-button" alt="播放">
                 </div>
                 <div class="track-item">
-                    <span class="track-text">02-/nBaroque</span>
+                    <span class="track-text">01-Barbershop</span>
                     <img src="images/playbutton.png" class="play-button" alt="播放">
                 </div>
                 <div class="track-item">
-                    <span class="track-text">03-/nBlues</span>
+                    <span class="track-text">02-Baroque</span>
                     <img src="images/playbutton.png" class="play-button" alt="播放">
                 </div>
                 <div class="track-item">
-                    <span class="track-text">04-/nBig_Band_Jazz</span>
+                    <span class="track-text">03-Blues</span>
                     <img src="images/playbutton.png" class="play-button" alt="播放">
                 </div>
                 <div class="track-item">
-                    <span class="track-text">05-/nFunk&RnB</span>
+                    <span class="track-text">04-Big_Band_Jazz</span>
                     <img src="images/playbutton.png" class="play-button" alt="播放">
                 </div>
                 <div class="track-item">
-                    <span class="track-text">06-/nHardcore_Punk</span>
+                    <span class="track-text">05-Funk&RnB</span>
+                    <img src="images/playbutton.png" class="play-button" alt="播放">
+                </div>
+                <div class="track-item">
+                    <span class="track-text">06-Hardcore_Punk</span>
                     <img src="images/playbutton.png" class="play-button" alt="播放">
                 </div>
             </div>
         </div>
         <div class="record-player">
-            <img src="images/recordplayer-basic.png" alt="唱片机">
+            <img src="images/recordplayer-basic.png" alt="唱片机" class="player-base">
+            <img src="" alt="播放效果" class="player-overlay" style="display: none;">
+            <audio id="audioPlayer"></audio>
         </div>
     </div>
     <div class="nav-buttons">
@@ -45,5 +52,7 @@
             <img src="images/Toggle-chat.png" alt="返回主页">
         </a>
     </div>
+    <script src="audio.js"></script>
+    <script src="player.js"></script>
 </body>
 </html> 

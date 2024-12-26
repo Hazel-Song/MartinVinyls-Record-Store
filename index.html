@@ -5,15 +5,30 @@
     <title>复古唱片店</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body>  
+    <div class="selected-container">
+        <div class="selected-box" id="moodBox">
+            <h3>心情 (Mood)</h3>
+            <div class="selected-word" id="moodWord"></div>
+        </div>
+        <div class="selected-box" id="styleBox">
+            <h3>风格 (Style)</h3>
+            <div class="selected-word" id="styleWord"></div>
+        </div>
+        <div class="selected-box" id="storyBox">
+            <h3>故事 (Story)</h3>
+            <div class="selected-word" id="storyWord"></div>
+        </div>
+    </div>
     <div class="background"></div>
+    <img src="images/check.png" alt="check" class="check-image">
     <div class="container">
         <div class="npc" id="npc"></div>
         <div class="dialog-box">
             <div class="chat-history" id="chatHistory"></div>
             <div class="input-area">
                 <input type="text" id="userInput" placeholder="和店主聊聊天吧...">
-                <button id="sendBtn">发送</button>
+                <!--button id="sendBtn">发送</button-->
             </div>
         </div>
         <div class="nav-buttons">
@@ -25,6 +40,12 @@
             </a>
         </div>
     </div>
+    <button id="clearBtn" class="clear-button">清除记录</button> 
+    <audio id="backgroundAudio" loop></audio>
+    <div id="recommendTip" class="recommend-tip" style="display: none;">
+        适合您的唱片已经找到了！<br>请移步唱片台~
+    </div>
     <script src="script.js"></script>
+    <script src="audio.js"></script>
 </body>
-</html> 
+</html>
