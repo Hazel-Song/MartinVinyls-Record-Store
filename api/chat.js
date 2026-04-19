@@ -6,18 +6,18 @@ export default async function handler(req, res) {
     const { messages, temperature = 0.7 } = req.body;
 
     try {
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+                'Authorization': `Bearer sk-b78c6ba6b10046c78550f77c9b5f4e9c`
             },
-            body: JSON.stringify({ model: 'gpt-4', messages, temperature })
+            body: JSON.stringify({ model: 'deepseek-chat', messages, temperature })
         });
 
         const data = await response.json();
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch from OpenAI' });
+        res.status(500).json({ error: 'Failed to fetch from DeepSeek' });
     }
 }
