@@ -1,0 +1,27 @@
+{
+  "name": "project-martinvinyls-record-store-main",
+  "version": "1.0.0",
+  "description": "![马丁黑胶的介绍](https://github.com/user-attachments/assets/f8c9229e-6284-4895-b17a-b2e7fe2cacac)",
+  "main": "audio.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hazel-Song/MartinVinyls-Record-Store.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Hazel-Song/MartinVinyls-Record-Store/issues"
+  },
+  "homepage": "https://github.com/Hazel-Song/MartinVinyls-Record-Store#readme",
+  "dependencies": {
+    "openai": "^6.34.0"
+  }
+}

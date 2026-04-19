@@ -1,3 +1,10 @@
+import OpenAI from "openai";
+
+const client = new OpenAI({
+    baseURL: 'https://api.deepseek.com',
+    apiKey: process.env.DEEPSEEK_API_KEY,
+});
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
@@ -6,18 +13,15 @@ export default async function handler(req, res) {
     const { messages, temperature = 0.7 } = req.body;
 
     try {
-        const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`
-            },
-            body: JSON.stringify({ model: 'deepseek-chat', messages, temperature })
+        const completion = await client.chat.completions.create({
+            model: 'deepseek-chat',
+            messages,
+            temperature,
         });
 
-        const data = await response.json();
-        res.status(200).json(data);
+        res.status(200).json(completion);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch from DeepSeek' });
+        console.error('DeepSeek error:', error);
+        res.status(500).json({ error: error.message });
     }
 }
