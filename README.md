@@ -1,9 +1,9 @@
-# Martin Vinyl's Record Store
-### 一家只为你开的复古唱片店
+# 马丁黑胶的唱片店
+" 一家只为你开的复古唱片店
 
 **体验地址：** https://martinvinyls-record-store.vercel.app/
 
-一个 AI 驱动的沉浸式音乐推荐体验。你不需要填问卷，不需要选标签——走进来，和店主聊聊天，他会为你挑一张唱片。
+一个AI驱动的沉浸式音乐生成体验。你只需要走进来，和店主聊聊天，他就会为你挑选一张专为你定制的唱片。
 
 ---
 
@@ -20,7 +20,7 @@
 ## 体验流程
 
 ```
-走进店里  →  和马丁聊天  →  他为你挑唱片  →  带走它
+走进店里  →  和马丁聊天  →  挑唱片  →  带走它
 ```
 
 1. 打开页面，和店主马丁·黑胶聊聊今天发生的事、你现在的心情
@@ -33,60 +33,12 @@
 ## 认识马丁·黑胶
 
 55 岁，郁郁不得志的老派唱片店主。他不会给你鸡汤，不会假装热情，但他真的在听你说话。他的回复简短、犀利，偶尔讽刺，但总能说到点子上。
-
 他不推荐任何现实中存在的音乐——货架上全是他自己的私藏，你在任何平台都找不到。
 
 ---
 
-## 页面结构
+## 技术栈架构
 
-| 路由 | 页面 | 说明 |
-|------|------|------|
-| `/` | 主页 | 与 NPC 马丁·黑胶对话，收集情感标签 |
-| `/player` | 样带播放器 | 7 种风格样带试听，波形可视化 |
-| `/output` | 礼品包装台 | 展示推荐唱片封面，营造仪式感 |
-
----
-
-## 音乐风格
-
-| 编号 | 风格 | 曲目 |
-|------|------|------|
-| 00 | Background | Echoes of Vinyl |
-| 01 | Barbershop | Burning Pages |
-| 02 | Baroque | Echoes of Love |
-| 03 | Blues | Ghosts of Yesterday |
-| 04 | Big Band Jazz | Let It Fade |
-| 05 | Funk & R&B | Lost Light |
-| 06 | Hardcore Punk | Shattered Chains |
-
----
-
-## 技术栈
-
-- **框架**: Next.js (App Router)
-- **样式**: Tailwind CSS v4
-- **AI 对话**: DeepSeek API
-- **音乐生成**: Suno
-- **图像生成**: ComfyUI
-- **字体**: IPix（像素风中文字体）
-
----
-
-## 本地运行
-
-```bash
-# 安装依赖
-npm install
-
-# 配置环境变量
-echo "DEEPSEEK_API_KEY=your_key_here" > .env.local
-
-# 启动开发服务器
-npm run dev
-```
-
-打开 [http://localhost:3000](http://localhost:3000) 即可体验。
 
 ---
 
