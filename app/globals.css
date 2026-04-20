@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'IPix';
+    src: url('/fonts/IPix.ttf') format('truetype');
+}
+
+@theme inline {
+    --font-ipix: 'IPix', sans-serif;
+    --color-orange-main: #ff9800;
+    --color-orange-dark: rgb(200, 120, 0);
+    --color-orange-label: rgb(255, 153, 0);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: #000;
+    font-family: 'IPix', sans-serif;
+}
+
+/* 自定义滚动条 */
+.chat-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-scrollbar::-webkit-scrollbar-track {
+    background: #2f3136;
+}
+.chat-scrollbar::-webkit-scrollbar-thumb {
+    background: #202225;
+    border-radius: 4px;
+}
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #40444b;
+}
+
+/* NPC 浮动动画 */
+@keyframes floatNPC {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* 封面浮动动画 */
+@keyframes floatImage {
+    0%   { transform: translate(-50%, -50%); }
+    50%  { transform: translate(-50%, calc(-50% - 10px)); }
+    100% { transform: translate(-50%, -50%); }
+}
+
+.animate-float-npc {
+    animation: floatNPC 3s ease-in-out infinite;
+}
+.animate-float-npc.paused {
+    animation-play-state: paused;
+}
+
+.animate-float-image {
+    animation: floatImage 3s ease-in-out infinite;
+}
+.animate-float-image.paused {
+    animation-play-state: paused;
+}
+
+/* 可点击标签高亮 */
+.tag-clickable {
+    color: rgb(255, 153, 0);
+    cursor: pointer;
+    font-weight: bold;
+}
